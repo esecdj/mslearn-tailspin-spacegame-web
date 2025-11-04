@@ -24,6 +24,7 @@ jobs:
           pwd
           ./ScaResolver --help
           echo $PATH
+          mv ScaResolver /usr/bin
       - name: Checkmarx One CLI Action
         uses: checkmarx/ast-github-action@main 
         with:
@@ -32,4 +33,4 @@ jobs:
           base_uri: https://ind.ast.checkmarx.net 
           cx_client_id: ${{ secrets.CX_CLIENT_ID }}
           cx_client_secret: ${{ secrets.CX_CLIENT_SECRET }}
-          additional_params:  --sca-resolver ./
+          additional_params:  --sca-resolver ScaResolver
