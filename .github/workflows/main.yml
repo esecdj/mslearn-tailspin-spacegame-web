@@ -20,7 +20,8 @@ jobs:
         run: |
           wget https://sca-downloads.s3.amazonaws.com/cli/latest/ScaResolver-linux64.tar.gz
           tar -xzf ScaResolver-linux64.tar.gz
-          chmod a+x ./ScaResolver
+          chmod +x ./ScaResolver
+          pwd
           ./ScaResolver --help
           echo $PATH
       - name: Checkmarx One CLI Action
@@ -31,4 +32,4 @@ jobs:
           base_uri: https://ind.ast.checkmarx.net 
           cx_client_id: ${{ secrets.CX_CLIENT_ID }}
           cx_client_secret: ${{ secrets.CX_CLIENT_SECRET }}
-          additional_params:  --sca-resolver ScaResolver
+          additional_params:  --sca-resolver ./
