@@ -1,0 +1,34 @@
+name: CI
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        
+      - name: Setup Node.js environment
+        uses: actions/setup-node@v6.0.0
+        
+      - name: shell
+        run: |
+          wget https://sca-downloads.s3.amazonaws.com/cli/latest/ScaResolver-linux64.tar.gz
+          tar -xzf ScaResolver-linux64.tar.gz
+          chmod a+x ./ScaResolver
+          ./ScaResolver --help
+
+      - name: Checkmarx One CLI Action
+        uses: checkmarx/ast-github-action@main 
+        with:
+          project_name: python
+          cx_tenant: cdac
+          base_uri: https://ind.ast.checkmarx.net 
+          cx_client_id: ${{ secrets.CX_CLIENT_ID }}
+          cx_client_secret: ${{ secrets.CX_CLIENT_SECRET }}
+          additional_params:  --sca-resolver "./abc"
