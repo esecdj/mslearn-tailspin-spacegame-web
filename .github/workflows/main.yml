@@ -22,6 +22,7 @@ jobs:
           tar -xzf ScaResolver-linux64.tar.gz
           chmod a+x ./ScaResolver
           ./ScaResolver --help
+          echo $PATH
 
       - name: Checkmarx One CLI Action
         uses: checkmarx/ast-github-action@main 
