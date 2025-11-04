@@ -24,7 +24,9 @@ jobs:
           pwd
           ./ScaResolver --help
           echo $PATH
-          mv ScaResolver /usr/bin
+          mv ScaResolver /home/runner/work
+          export PATH="/home/runner/work/ScaResolver:$PATH"
+          echo $PATH
       - name: Checkmarx One CLI Action
         uses: checkmarx/ast-github-action@main 
         with:
@@ -33,4 +35,4 @@ jobs:
           base_uri: https://ind.ast.checkmarx.net 
           cx_client_id: ${{ secrets.CX_CLIENT_ID }}
           cx_client_secret: ${{ secrets.CX_CLIENT_SECRET }}
-          additional_params:  --sca-resolver ScaResolver
+          additional_params:  --sca-resolver /home/runner/work/mslearn-tailspin-spacegame-web/mslearn-tailspin-spacegame-web/ScaResolver
